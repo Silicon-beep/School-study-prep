@@ -1,0 +1,31 @@
+import { mcq } from '../mcq'
+
+const B = 'psyc-1'
+
+function question(id: string, stem: string, correct: string, distractors: [string, string, string], explanation: string) {
+  return mcq(B, id, stem, [[correct, true], ...distractors.map((body) => [body, false] as [string, boolean])], explanation)
+}
+
+export const psychology1Supplement = [
+  question('psyc-1-010', 'Which nervous-system division controls voluntary skeletal muscles?', 'Somatic nervous system', ['Autonomic nervous system', 'Endocrine system', 'Limbic system'], 'The somatic division carries sensory input and controls voluntary skeletal movement.'),
+  question('psyc-1-011', 'The sympathetic nervous system prepares the body for:', 'Fight or flight', ['Rest and digestion', 'Long-term memory storage', 'Language production'], 'Sympathetic activation mobilizes energy during challenge or threat.'),
+  question('psyc-1-012', 'Neurotransmitters cross the gap between neurons called the:', 'Synaptic cleft', ['Myelin sheath', 'Corpus callosum', 'Frontal lobe'], 'Chemical messengers diffuse across the synaptic cleft to receptors.'),
+  question('psyc-1-013', 'Which lobe is most associated with visual processing?', 'Occipital lobe', ['Temporal lobe', 'Frontal lobe', 'Parietal lobe'], 'The primary visual cortex is located in the occipital lobe.'),
+  question('psyc-1-014', 'A hypothesis is best described as:', 'A testable prediction', ['A proven law', 'An unmeasured opinion', 'A random sample'], 'A scientific hypothesis makes a prediction that evidence can support or challenge.'),
+  question('psyc-1-015', 'Random assignment primarily helps researchers:', 'Create comparable experimental groups', ['Guarantee a representative population sample', 'Eliminate the dependent variable', 'Prove correlation is causation'], 'Random assignment distributes participant differences across conditions.'),
+  question('psyc-1-016', 'A correlation of -0.90 indicates:', 'A strong negative relationship', ['A weak positive relationship', 'No relationship', 'Proof of causation'], 'The magnitude is strong and the negative sign indicates opposite movement.'),
+  question('psyc-1-017', 'The placebo effect occurs when outcomes change because of:', 'Expectations about a treatment', ['Random assignment alone', 'A perfect correlation', 'Sensory adaptation'], 'Beliefs and expectations can produce real perceived or behavioral changes.'),
+  question('psyc-1-018', 'In operant conditioning, punishment aims to:', 'Decrease a behavior', ['Increase a behavior', 'Create an unconditioned stimulus', 'Erase all memory'], 'Both positive and negative punishment reduce the future frequency of behavior.'),
+  question('psyc-1-019', 'Learning by watching and imitating others is:', 'Observational learning', ['Latent inhibition', 'Habituation only', 'Classical extinction'], 'Observational learning occurs through models without direct reinforcement.'),
+  question('psyc-1-020', 'In classical conditioning, extinction occurs when the conditioned stimulus:', 'Is repeatedly presented without the unconditioned stimulus', ['Is paired more strongly with the unconditioned stimulus', 'Becomes a punishment', 'Is removed after one trial'], 'The conditioned response weakens when the expected unconditioned stimulus no longer follows.'),
+  question('psyc-1-021', 'Encoding refers to:', 'Getting information into memory', ['Maintaining balance', 'Removing all interference', 'Measuring intelligence'], 'Encoding transforms information into a form the memory system can retain.'),
+  question('psyc-1-022', 'The misinformation effect demonstrates that memory is:', 'Reconstructive and open to distortion', ['A perfect recording', 'Stored only in short-term memory', 'Unaffected by later information'], "Later misleading details can alter a person's recollection of an event."),
+  question('psyc-1-023', 'Chunking improves memory by:', 'Grouping separate items into meaningful units', ['Preventing all forgetting', 'Eliminating long-term memory', 'Increasing sensory receptor count'], 'Organizing information into chunks reduces the number of units held at once.'),
+  question('psyc-1-024', 'Object permanence is the understanding that objects:', 'Continue to exist when out of sight', ['Always change shape', 'Have no physical properties', 'Can be remembered only with language'], 'Infants develop the understanding that hidden objects still exist.'),
+  question('psyc-1-025', 'According to attachment research, a securely attached child typically:', 'Uses the caregiver as a safe base for exploration', ['Avoids all contact permanently', 'Shows no preference for caregivers', 'Cannot be comforted after separation'], 'Secure attachment balances exploration with seeking comfort from a trusted caregiver.'),
+  question('psyc-1-026', 'The Big Five personality traits include openness, conscientiousness, extraversion, agreeableness, and:', 'Neuroticism', ['Intelligence', 'Self-actualization', 'Conditioning'], 'Neuroticism, or emotional instability, completes the common five-factor model.'),
+  question('psyc-1-027', 'Cognitive dissonance is discomfort caused by:', 'Conflicting attitudes or behavior', ['Deep sleep', 'Perfect agreement', 'Sensory deprivation only'], 'People are motivated to reduce inconsistency among beliefs and actions.'),
+  question('psyc-1-028', 'Conformity is a change in behavior or belief due to:', 'Real or imagined group pressure', ['Brain injury only', 'Classical conditioning only', 'Genetic mutation'], 'Conformity aligns a person with group norms or expectations.'),
+  question('psyc-1-029', 'The bystander effect predicts that helping may decrease when:', 'More witnesses are present', ['A person is alone with the victim', 'Responsibility is clearly assigned', 'The emergency is unambiguous'], 'Responsibility can diffuse across a larger group of witnesses.'),
+  question('psyc-1-030', 'Self-serving bias is the tendency to attribute successes to oneself and failures to:', 'External circumstances', ['Stable personal ability', 'Internal character only', 'Accurate random sampling'], 'Self-serving explanations protect self-esteem by externalizing failures.'),
+]

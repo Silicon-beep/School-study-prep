@@ -1,0 +1,26 @@
+import { mcq } from '../mcq'
+
+const B = 'physics-1'
+
+export const physics1 = [
+  mcq(B, 'physics-1-001', 'Which quantity is a vector?', [['Speed', false], ['Distance', false], ['Velocity', true], ['Mass', false]], 'Velocity has both magnitude and direction, so it is a vector.'),
+  mcq(B, 'physics-1-002', 'A car travels 120 m in 10 s at constant speed. What is its speed?', [['10 m/s', false], ['12 m/s', true], ['20 m/s', false], ['1200 m/s', false]], 'Speed is distance divided by time: 120 m / 10 s = 12 m/s.'),
+  mcq(B, 'physics-1-003', 'What does the slope of a position-versus-time graph represent?', [['Acceleration', false], ['Velocity', true], ['Force', false], ['Momentum', false]], 'The rate of change of position with time is velocity.'),
+  mcq(B, 'physics-1-004', 'An object starts from rest and accelerates at 3 m/s^2 for 4 s. What is its final speed?', [['7 m/s', false], ['12 m/s', true], ['16 m/s', false], ['24 m/s', false]], 'Using v = v0 + at gives v = 0 + (3)(4) = 12 m/s.'),
+  mcq(B, 'physics-1-005', 'Near Earth, and ignoring air resistance, objects in free fall accelerate at approximately:', [['4.9 m/s^2 upward', false], ['9.8 m/s^2 downward', true], ['9.8 m/s downward', false], ['98 m/s^2 upward', false]], 'Earth causes a nearly constant downward acceleration of 9.8 m/s^2 near its surface.'),
+  mcq(B, 'physics-1-006', 'Newton\'s first law is also called the law of:', [['Gravitation', false], ['Inertia', true], ['Momentum', false], ['Action and reaction', false]], 'The first law describes inertia: motion remains unchanged unless a net external force acts.'),
+  mcq(B, 'physics-1-007', 'What net force accelerates a 5 kg object at 2 m/s^2?', [['2.5 N', false], ['7 N', false], ['10 N', true], ['25 N', false]], 'Newton\'s second law gives F = ma = (5 kg)(2 m/s^2) = 10 N.'),
+  mcq(B, 'physics-1-008', 'Newton\'s third-law force pairs act on:', [['The same object', false], ['Different objects', true], ['Only moving objects', false], ['Only objects in contact', false]], 'Action-reaction forces are equal and opposite but act on two different interacting objects.'),
+  mcq(B, 'physics-1-009', 'If the net force on an object is zero, the object must have:', [['Zero velocity', false], ['Zero acceleration', true], ['Zero mass', false], ['Increasing momentum', false]], 'Zero net force means zero acceleration; velocity may be zero or constant.'),
+  mcq(B, 'physics-1-010', 'Which force opposes relative sliding between two surfaces?', [['Normal force', false], ['Friction', true], ['Tension', false], ['Weight', false]], 'Friction acts parallel to contacting surfaces and opposes relative motion or attempted motion.'),
+  mcq(B, 'physics-1-011', 'How much work is done by a 10 N force parallel to a 3 m displacement?', [['3 J', false], ['13 J', false], ['30 J', true], ['300 J', false]], 'For a parallel force, W = Fd = (10 N)(3 m) = 30 J.'),
+  mcq(B, 'physics-1-012', 'The kinetic energy of a 2 kg object moving at 3 m/s is:', [['3 J', false], ['6 J', false], ['9 J', true], ['18 J', false]], 'K = (1/2)mv^2 = (1/2)(2)(3^2) = 9 J.'),
+  mcq(B, 'physics-1-013', 'Gravitational potential energy near Earth is calculated using:', [['mv', false], ['mgh', true], ['1/2 mv^2', false], ['F/t', false]], 'Near Earth, the change in gravitational potential energy is mgh.'),
+  mcq(B, 'physics-1-014', 'Mechanical energy is conserved when:', [['Only conservative forces do work', true], ['Friction does positive work', false], ['Momentum is zero', false], ['Acceleration is constant', false]], 'Kinetic plus potential energy remains constant when only conservative forces do work.'),
+  mcq(B, 'physics-1-015', 'Power is the rate at which:', [['Momentum changes', false], ['Work is done', true], ['Mass is transferred', false], ['Velocity changes direction', false]], 'Power equals work divided by elapsed time.'),
+  mcq(B, 'physics-1-016', 'Linear momentum is defined as:', [['Mass times velocity', true], ['Mass times acceleration', false], ['Force times distance', false], ['Energy per unit time', false]], 'Linear momentum is p = mv and points in the velocity direction.'),
+  mcq(B, 'physics-1-017', 'Impulse equals the change in an object\'s:', [['Kinetic energy', false], ['Momentum', true], ['Mass', false], ['Position', false]], 'Impulse, the integral of force over time, equals the change in momentum.'),
+  mcq(B, 'physics-1-018', 'Total momentum is conserved in a system when the net external impulse is:', [['Maximum', false], ['Zero', true], ['Equal to the kinetic energy', false], ['Parallel to velocity', false]], 'With zero net external impulse, internal forces cannot change the system\'s total momentum.'),
+  mcq(B, 'physics-1-019', 'In a perfectly inelastic collision, the objects:', [['Bounce apart with equal speeds', false], ['Stick together', true], ['Conserve kinetic energy', false], ['Have zero total momentum', false]], 'Perfectly inelastic objects stick together; momentum is conserved but kinetic energy is not.'),
+  mcq(B, 'physics-1-020', 'For uniform circular motion, the centripetal acceleration points:', [['Tangent to the circle', false], ['Away from the center', false], ['Toward the center', true], ['In the direction of gravity only', false]], 'Centripetal acceleration continually points toward the center of the circular path.'),
+]

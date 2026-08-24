@@ -1,0 +1,308 @@
+.chooser {
+  padding: 24px;
+  background: var(--surface);
+  border: 1px solid var(--surface-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+}
+
+.chooser__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  gap: 12px;
+}
+
+.chooser__title-group {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.chooser__header-icon {
+  color: var(--primary);
+}
+
+.chooser__title {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: var(--text-primary);
+}
+
+.chooser__total-badge {
+  font-size: 0.75rem;
+}
+
+/* Search Area */
+.chooser__search {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-bottom: 20px;
+}
+
+.chooser__search-field {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.chooser__search-icon {
+  position: absolute;
+  left: 14px;
+  color: var(--text-tertiary);
+  pointer-events: none;
+}
+
+.chooser__search-field input {
+  width: 100%;
+  height: 48px;
+  padding: 0 42px 0 42px;
+  font-family: inherit;
+  font-size: 0.9375rem;
+  color: var(--text-primary);
+  background: var(--surface-alt);
+  border: 1px solid var(--surface-border);
+  border-radius: var(--radius-sm);
+  transition: var(--transition);
+}
+
+.chooser__search-field input::-webkit-search-cancel-button {
+  display: none;
+}
+
+.chooser__search-field input:focus {
+  background: var(--surface);
+  border-color: var(--primary);
+  box-shadow: var(--ring);
+  outline: none;
+}
+
+.chooser__clear {
+  position: absolute;
+  right: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--surface-border);
+  color: var(--text-secondary);
+  border: none;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.chooser__clear:hover {
+  background: var(--surface-border-strong);
+  color: var(--text-primary);
+}
+
+/* Chips / Department filters */
+.chooser__chips {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  padding-bottom: 4px;
+  scrollbar-width: thin;
+}
+
+.chooser__chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 6px 12px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  background: var(--surface-alt);
+  border: 1px solid var(--surface-border);
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: var(--transition);
+}
+
+.chooser__chip:hover {
+  background: var(--surface-hover);
+  border-color: var(--primary-border);
+  color: var(--primary);
+}
+
+.chooser__chip--active {
+  background: var(--primary-light);
+  color: var(--primary);
+  border-color: var(--primary-border);
+}
+
+.chooser__chip-count {
+  font-size: 0.6875rem;
+  opacity: 0.8;
+}
+
+.chooser__meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.chooser__count {
+  margin: 0;
+  font-size: 0.8125rem;
+  color: var(--text-secondary);
+}
+
+/* List Items */
+.chooser__list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.chooser__item {
+  display: flex;
+  gap: 14px;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  min-height: 56px;
+  padding: 12px 16px;
+  font: inherit;
+  color: var(--text-primary);
+  text-align: left;
+  background: var(--surface-alt);
+  border: 1px solid var(--surface-border);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.chooser__item:hover {
+  background: var(--surface-hover);
+  border-color: var(--primary-border);
+  box-shadow: var(--shadow-sm);
+  transform: translateY(-1px);
+}
+
+.chooser__item:hover .chooser__action {
+  color: var(--primary);
+  transform: translateX(3px);
+}
+
+.chooser__item:hover .chooser__code-badge {
+  background: var(--primary);
+  color: #ffffff;
+}
+
+.chooser__text {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  min-width: 0;
+}
+
+@media (min-width: 540px) {
+  .chooser__text {
+    flex-direction: row;
+    align-items: center;
+    gap: 12px;
+  }
+}
+
+.chooser__code-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 3px 8px;
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  font-weight: 700;
+  background: var(--primary-light);
+  color: var(--primary);
+  border-radius: var(--radius-xs);
+  transition: var(--transition);
+  flex-shrink: 0;
+  width: fit-content;
+}
+
+.chooser__sublabel {
+  overflow: hidden;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.chooser__action {
+  display: flex;
+  align-items: center;
+  color: var(--text-tertiary);
+  transition: var(--transition);
+  flex-shrink: 0;
+}
+
+/* Empty View */
+.chooser__empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 48px 16px;
+  text-align: center;
+  background: var(--surface-alt);
+  border: 1px dashed var(--surface-border-strong);
+  border-radius: var(--radius-md);
+  margin: 12px 0;
+}
+
+.chooser__empty-icon {
+  color: var(--text-tertiary);
+  margin-bottom: 12px;
+}
+
+.chooser__empty-title {
+  margin: 0 0 6px;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.chooser__empty-desc {
+  margin: 0 0 16px;
+  font-size: 0.8125rem;
+  color: var(--text-secondary);
+  max-width: 360px;
+}
+
+.chooser__more {
+  display: inline-flex;
+  gap: 8px;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 48px;
+  margin-top: 16px;
+  font: inherit;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--primary);
+  background: var(--primary-light);
+  border: 1px dashed var(--primary-border);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.chooser__more:hover {
+  background: var(--primary);
+  color: #ffffff;
+  border-style: solid;
+}
