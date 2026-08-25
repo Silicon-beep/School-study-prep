@@ -51,7 +51,8 @@ export function practiceAssessmentsForCourse(courseId: string): Assessment[] {
 export function assessmentsForCourse(courseId: string, syllabusId?: string): Assessment[] {
   const courseSyllabi = syllabiForCourse(courseId)
   if (courseSyllabi.length > 0) {
-    return syllabusId ? assessmentsForSyllabus(syllabusId) : []
+    const targetSyllabusId = syllabusId ?? (courseSyllabi.length === 1 ? courseSyllabi[0].id : undefined)
+    return targetSyllabusId ? assessmentsForSyllabus(targetSyllabusId) : []
   }
   return practiceAssessmentsForCourse(courseId)
 }

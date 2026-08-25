@@ -10,6 +10,9 @@ export const banks: QuestionBank[] = [
   { id: 'psyc-1', name: 'General Psychology' },
   { id: 'physics-1', name: 'Physics I' },
   { id: 'stats-1', name: 'Introductory Statistics' },
+  { id: 'econ-1', name: 'Principles of Microeconomics' },
+  { id: 'math-1180', name: 'College Mathematics' },
+  { id: 'comm-1', name: 'Introduction to Communication' },
 ]
 
 export const colleges: College[] = [
@@ -106,6 +109,9 @@ const catalogByCollege: Record<string, CourseSeed[]> = {
     { code: 'PSYC 1630', title: 'General Psychology', bankId: 'psyc-1' },
     { code: 'PHYS 1710', title: 'Mechanics', bankId: 'physics-1' },
     { code: 'MATH 1680', title: 'Elementary Probability and Statistics', bankId: 'stats-1' },
+    { code: 'ECON 1100', title: 'Principles of Microeconomics', bankId: 'econ-1' },
+    { code: 'MATH 1180', title: 'College Math for Business and Economics', bankId: 'math-1180' },
+    { code: 'COMM 1010', title: 'Introduction to Communication', bankId: 'comm-1' },
   ],
   'ut-austin': [
     { code: 'BIO 311C', title: 'Introductory Biology I', bankId: 'bio-1' },
@@ -114,6 +120,9 @@ const catalogByCollege: Record<string, CourseSeed[]> = {
     { code: 'PSY 301', title: 'Introduction to Psychology', bankId: 'psyc-1' },
     { code: 'PHY 303K', title: 'Engineering Physics I', bankId: 'physics-1' },
     { code: 'SDS 301', title: 'Elementary Statistical Methods', bankId: 'stats-1' },
+    { code: 'ECO 304K', title: 'Introduction to Microeconomics', bankId: 'econ-1' },
+    { code: 'M 305G', title: 'Preparation for Calculus', bankId: 'math-1180' },
+    { code: 'CMS 306M', title: 'Professional Communication Skills', bankId: 'comm-1' },
   ],
   tamu: [
     { code: 'BIOL 111', title: 'Introductory Biology I', bankId: 'bio-1' },
@@ -122,6 +131,9 @@ const catalogByCollege: Record<string, CourseSeed[]> = {
     { code: 'PSYC 107', title: 'Introduction to Psychology', bankId: 'psyc-1' },
     { code: 'PHYS 206', title: 'Newtonian Mechanics for Engineering and Science', bankId: 'physics-1' },
     { code: 'STAT 211', title: 'Principles of Statistics I', bankId: 'stats-1' },
+    { code: 'ECON 202', title: 'Principles of Economics', bankId: 'econ-1' },
+    { code: 'MATH 140', title: 'Mathematics for Business and Social Sciences', bankId: 'math-1180' },
+    { code: 'COMM 205', title: 'Communication for Technical Professions', bankId: 'comm-1' },
   ],
   ttu: [
     { code: 'BIOL 1403', title: 'Biology I', bankId: 'bio-1' },

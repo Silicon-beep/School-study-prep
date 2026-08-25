@@ -13,7 +13,7 @@ describe('general course practice', () => {
       (course) => course.bankId && syllabiForCourse(course.id).length === 0,
     )
 
-    expect(fallbackCourses).toHaveLength(157)
+    expect(fallbackCourses).toHaveLength(166)
     for (const course of fallbackCourses) {
       const assessments = assessmentsForCourse(course.id)
       expect(assessments.length, course.id).toBeGreaterThan(0)
@@ -55,7 +55,7 @@ describe('general course practice', () => {
     },
   )
 
-  it.each(['unt-phys-1710', 'unt-math-1680'])(
+  it.each(['unt-phys-1710', 'unt-math-1680', 'unt-econ-1100', 'unt-math-1180', 'unt-comm-1010'])(
     'provides two quizzes, an exam, and a final for %s',
     (courseId) => {
       const assessments = assessmentsForCourse(courseId)

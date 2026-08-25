@@ -102,3 +102,19 @@ export interface Question {
 export interface QuestionWithChoices extends Question {
   choices: Choice[]
 }
+
+/** Record of a completed quiz or exam session for progress tracking. */
+export interface CompletedAssessmentRecord {
+  assessmentId: string
+  courseId: string
+  score: number
+  total: number
+  completedAt: string
+}
+
+/** The student's personalized schedule and study history for a college. */
+export interface StudentSchedule {
+  collegeId: string
+  enrolledCourseIds: string[]
+  history: Record<string, CompletedAssessmentRecord>
+}

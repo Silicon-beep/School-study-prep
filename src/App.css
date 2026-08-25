@@ -384,3 +384,54 @@
 .summary__btn {
   width: 100%;
 }
+
+/* Single Course Study View Wrapper */
+.course-study-view {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.course-study-view__header {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 24px;
+  background: var(--surface);
+  border: 1px solid var(--surface-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+}
+
+.course-study-view__back-btn {
+  align-self: flex-start;
+  height: 38px;
+  font-size: 0.8125rem;
+}
+
+.course-study-view__title-box {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.course-study-view__code-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 10px;
+  font-family: var(--font-mono);
+  font-size: 1.125rem;
+  font-weight: 800;
+  background: var(--primary-light);
+  color: var(--primary);
+  border-radius: var(--radius-xs);
+}
+
+.course-study-view__title {
+  margin: 0;
+  font-size: clamp(1.35rem, 2.5vw, 1.75rem);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: var(--text-primary);
+}

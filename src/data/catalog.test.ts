@@ -1,6 +1,13 @@
 import { describe, expect, it } from 'vitest'
 import { banks, colleges, collegeStateGroups, courses } from './catalog'
 import { catalogSources } from './catalog-sources'
+import {
+  getCompletedAssessments,
+  getEnrolledCourseIds,
+  mixedQuestionsForCourses,
+  recordAssessmentCompletion,
+  saveEnrolledCourseIds,
+} from './index'
 
 const addedCollegeIds = colleges.slice(10).map(({ id }) => id).sort()
 const ivyCollegeIds = [
@@ -32,20 +39,48 @@ describe('college catalog', () => {
     }
   })
 
-  it('adds Physics I and Introductory Statistics at three Texas universities', () => {
-    expect(courses.length).toBeGreaterThanOrEqual(158)
+  it('adds expanded STEM and Gen-Ed courses at three Texas universities', () => {
+    expect(courses.length).toBeGreaterThanOrEqual(167)
 
     for (const collegeId of ['unt', 'ut-austin', 'tamu']) {
       const bankIds = courses
         .filter((course) => course.collegeId === collegeId)
         .map(({ bankId }) => bankId)
 
-      expect(bankIds, collegeId).toEqual(expect.arrayContaining(['physics-1', 'stats-1']))
+      expect(bankIds, collegeId).toEqual(
+        expect.arrayContaining(['physics-1', 'stats-1', 'econ-1', 'math-1180', 'comm-1']),
+      )
     }
 
     expect(new Set(courses.flatMap(({ bankId }) => bankId ? [bankId] : []))).toEqual(
       new Set(banks.map(({ id }) => id)),
     )
+  })
+
+  it('generates a balanced mixed question set across multiple enrolled courses', () => {
+    const untSchedule = ['unt-econ-1100', 'unt-math-1180', 'unt-comm-1010', 'unt-biol-1710']
+    const mixed = mixedQuestionsForCourses(untSchedule, 20)
+
+    expect(mixed).toHaveLength(20)
+    const bankSet = new Set(mixed.map((q) => q.bankId))
+    expect(bankSet).toContain('econ-1')
+    expect(bankSet).toContain('math-1180')
+    expect(bankSet).toContain('comm-1')
+    expect(bankSet).toContain('bio-1')
+  })
+
+  it('persists and retrieves student schedule and assessment history', () => {
+    saveEnrolledCourseIds('unt', ['unt-econ-1100', 'unt-comm-1010'])
+    expect(getEnrolledCourseIds('unt')).toEqual(['unt-econ-1100', 'unt-comm-1010'])
+
+    recordAssessmentCompletion('econ-1-practice-quiz-1', 'unt-econ-1100', 9, 10)
+    const history = getCompletedAssessments()
+    expect(history['econ-1-practice-quiz-1']).toMatchObject({
+      assessmentId: 'econ-1-practice-quiz-1',
+      courseId: 'unt-econ-1100',
+      score: 9,
+      total: 10,
+    })
   })
 
   it('includes all eight Ivy League schools with four core courses each', () => {

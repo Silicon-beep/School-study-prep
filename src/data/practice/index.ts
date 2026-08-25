@@ -114,4 +114,16 @@ export const practiceAssessments: PracticeAssessment[] = [
     { label: 'Data and probability', coverageNote: 'Distributions, descriptive statistics, and probability', questionIds: range('stats-1', 1, 10) },
     { label: 'Sampling and inference', coverageNote: 'Study design, confidence intervals, tests, and correlation', questionIds: range('stats-1', 11, 20) },
   ]),
+  ...plan('econ-1', [
+    { label: 'Scarcity, supply, and demand', coverageNote: 'Opportunity cost, supply and demand shifts, equilibrium, and elasticity', questionIds: range('econ-1', 1, 10) },
+    { label: 'Production and market structures', coverageNote: 'Cost curves, profit maximization, competition, monopoly, and externalities', questionIds: range('econ-1', 11, 20) },
+  ]),
+  ...plan('math-1180', [
+    { label: 'Equations, quadratics, and functions', coverageNote: 'Linear equations, factoring, vertex form, function domain, and composites', questionIds: range('math-1180', 1, 10) },
+    { label: 'Logarithms, systems, and financial math', coverageNote: 'Logarithm rules, systems of equations, compound interest, and asymptotes', questionIds: range('math-1180', 11, 20) },
+  ]),
+  ...plan('comm-1', [
+    { label: 'Foundations and interpersonal communication', coverageNote: 'Transactional models, noise, nonverbal cues, active listening, and rhetoric', questionIds: range('comm-1', 1, 10) },
+    { label: 'Public speaking and group dynamics', coverageNote: 'Speech organization, extemporaneous delivery, groupthink, and conflict styles', questionIds: range('comm-1', 11, 20) },
+  ]),
 ]
