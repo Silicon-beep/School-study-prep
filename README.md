@@ -34,7 +34,7 @@ npm install
 npm run dev
 ```
 
-The dev server runs at http://localhost:5173/.
+The dev server runs at https://silicon-beep.github.io/School-study-prep/#colleges.
 
 ## Scripts
 
