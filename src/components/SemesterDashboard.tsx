@@ -24,6 +24,19 @@ interface SemesterDashboardProps {
   getCourseAssessments: (courseId: string) => Assessment[]
 }
 
+function getSubjectTheme(code: string): { color: string; label: string } {
+  const upper = code.toUpperCase()
+  if (upper.includes('BIO')) return { color: 'emerald', label: 'Biology' }
+  if (upper.includes('CHM') || upper.includes('CHE')) return { color: 'blue', label: 'Chemistry' }
+  if (upper.includes('MATH') || upper.includes('MTH') || upper.includes('MAT') || upper.includes('CALC')) return { color: 'violet', label: 'Mathematics' }
+  if (upper.includes('ECON') || upper.includes('ECO')) return { color: 'amber', label: 'Economics' }
+  if (upper.includes('PSY')) return { color: 'orange', label: 'Psychology' }
+  if (upper.includes('PHY')) return { color: 'cyan', label: 'Physics' }
+  if (upper.includes('STAT') || upper.includes('SDS')) return { color: 'rose', label: 'Statistics' }
+  if (upper.includes('COMM') || upper.includes('CMS')) return { color: 'sky', label: 'Communication' }
+  return { color: 'indigo', label: 'General' }
+}
+
 export function SemesterDashboard({
   collegeName,
   enrolledCourses,
@@ -174,12 +187,16 @@ export function SemesterDashboard({
           {courseStats.map(({ course, assessments, available, completed, accuracy }) => {
             const hasBank = Boolean(course.bankId)
             const isSyllabus = course.id === 'unt-biol-1710'
+            const theme = getSubjectTheme(course.code)
 
             return (
-              <div key={course.id} className="course-hub-card">
+              <div key={course.id} className={`course-hub-card course-hub-card--${theme.color}`}>
                 <div className="course-hub-card__header">
                   <div className="course-hub-card__top-row">
-                    <span className="course-hub-card__code">{course.code}</span>
+                    <div className="course-hub-card__code-wrap">
+                      <span className="course-hub-card__code">{course.code}</span>
+                      <span className="course-hub-card__subject-label">{theme.label}</span>
+                    </div>
                     {isSyllabus ? (
                       <span className="badge badge-success">
                         <ShieldCheck size={12} aria-hidden="true" />

@@ -558,3 +558,73 @@
   color: #ffffff;
   border-style: solid;
 }
+
+/* Floating Action Dock */
+.floating-schedule-bar {
+  position: fixed;
+  bottom: 24px;
+  left: 0;
+  right: 0;
+  z-index: 50;
+  display: flex;
+  justify-content: center;
+  pointer-events: none;
+  padding: 0 16px;
+  animation: slide-up 200ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.floating-schedule-bar__container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  width: 100%;
+  max-width: 820px;
+  padding: 14px 20px;
+  background: var(--surface);
+  border: 1px solid var(--primary-border);
+  border-radius: var(--radius-full);
+  box-shadow: 0 12px 36px -4px rgba(15, 23, 42, 0.25), var(--shadow-primary);
+  pointer-events: auto;
+  backdrop-filter: blur(12px);
+}
+
+.floating-schedule-bar__info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+}
+
+.floating-schedule-bar__badge {
+  flex-shrink: 0;
+}
+
+.floating-schedule-bar__codes {
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  font-weight: 700;
+  color: var(--text-secondary);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.floating-schedule-bar__btn {
+  height: 42px;
+  padding: 0 20px;
+  font-size: 0.875rem;
+  border-radius: var(--radius-full);
+  flex-shrink: 0;
+}
+
+@keyframes slide-up {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

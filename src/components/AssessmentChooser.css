@@ -211,6 +211,22 @@
   justify-content: space-between;
   gap: 8px;
   margin-bottom: 8px;
+  flex-wrap: wrap;
+}
+
+.assessment-card__badges {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.assessment-card--completed {
+  border-color: var(--success-border);
+}
+
+.assessment-card--completed:not(:disabled):hover {
+  border-color: var(--success);
 }
 
 .assessment-card__label {

@@ -364,6 +364,31 @@ export function CourseScheduleBuilder({
           </button>
         )}
       </section>
+
+      {/* Floating Action Dock for effortless continuation while scrolling */}
+      {selectedCourses.length > 0 && (
+        <div className="floating-schedule-bar" role="region" aria-label="Selected schedule summary">
+          <div className="floating-schedule-bar__container">
+            <div className="floating-schedule-bar__info">
+              <span className="floating-schedule-bar__badge badge badge-primary">
+                <Layers size={13} />
+                {selectedCourses.length} {selectedCourses.length === 1 ? 'course' : 'courses'} selected
+              </span>
+              <span className="floating-schedule-bar__codes">
+                {selectedCourses.map((c) => c.code).join(' · ')}
+              </span>
+            </div>
+            <button
+              type="button"
+              className="btn-primary floating-schedule-bar__btn"
+              onClick={onOpenDashboard}
+            >
+              <span>Open Semester Dashboard</span>
+              <ArrowRight size={16} aria-hidden="true" />
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   )
 }

@@ -255,12 +255,36 @@
   flex-wrap: wrap;
 }
 
+.course-hub-card__code-wrap {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
 .course-hub-card__code {
   font-family: var(--font-mono);
-  font-size: 1rem;
+  font-size: 1.0625rem;
   font-weight: 800;
   color: var(--primary);
 }
+
+.course-hub-card__subject-label {
+  font-size: 0.6875rem;
+  font-weight: 700;
+  color: var(--text-tertiary);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+/* Subject Colors */
+.course-hub-card--emerald { border-top: 3px solid #10b981; }
+.course-hub-card--blue { border-top: 3px solid #3b82f6; }
+.course-hub-card--violet { border-top: 3px solid #8b5cf6; }
+.course-hub-card--amber { border-top: 3px solid #f59e0b; }
+.course-hub-card--cyan { border-top: 3px solid #06b6d4; }
+.course-hub-card--rose { border-top: 3px solid #f43f5e; }
+.course-hub-card--sky { border-top: 3px solid #0ea5e9; }
+.course-hub-card--indigo { border-top: 3px solid #6366f1; }
 
 .course-hub-card__title {
   margin: 0;

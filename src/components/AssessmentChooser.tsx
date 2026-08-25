@@ -3,14 +3,16 @@ import {
   Award,
   BookOpen,
   Calendar,
+  CheckCircle2,
   ExternalLink,
   FileQuestion,
   GraduationCap,
   Info,
+  RotateCcw,
   ShieldCheck,
   User,
 } from 'lucide-react'
-import type { Assessment, SyllabusProfile } from '../types'
+import type { Assessment, CompletedAssessmentRecord, SyllabusProfile } from '../types'
 import './AssessmentChooser.css'
 
 interface AssessmentChooserProps {
@@ -18,6 +20,7 @@ interface AssessmentChooserProps {
   assessments: Assessment[]
   questionCount: (assessmentId: string) => number
   onSelect: (assessmentId: string) => void
+  history?: Record<string, CompletedAssessmentRecord>
 }
 
 const groupMeta: Record<
@@ -34,6 +37,7 @@ export function AssessmentChooser({
   assessments,
   questionCount,
   onSelect,
+  history = {},
 }: AssessmentChooserProps) {
   if (!syllabus && assessments.length === 0) {
     return (
@@ -136,27 +140,47 @@ export function AssessmentChooser({
                 {group.map((assessment) => {
                   const count = questionCount(assessment.id)
                   const isAvailable = count > 0
+                  const record = history[assessment.id]
+                  const isCompleted = Boolean(record)
+                  const scorePct = record ? Math.round((record.score / record.total) * 100) : 0
 
                   return (
                     <button
                       type="button"
-                      className={`assessment-card assessment-card--${color}`}
+                      className={`assessment-card assessment-card--${color} ${isCompleted ? 'assessment-card--completed' : ''}`}
                       key={assessment.id}
                       onClick={() => onSelect(assessment.id)}
                       disabled={!isAvailable}
                     >
                       <div className="assessment-card__header">
                         <span className="assessment-card__label">{assessment.label}</span>
-                        <span className={`assessment-card__count ${isAvailable ? 'badge badge-primary' : 'badge badge-neutral'}`}>
-                          {isAvailable ? `${count} questions` : 'Coming soon'}
-                        </span>
+                        <div className="assessment-card__badges">
+                          {isCompleted && (
+                            <span className="badge badge-success">
+                              <CheckCircle2 size={11} aria-hidden="true" />
+                              {record.score}/{record.total} ({scorePct}%)
+                            </span>
+                          )}
+                          <span className={`assessment-card__count ${isAvailable ? 'badge badge-primary' : 'badge badge-neutral'}`}>
+                            {isAvailable ? `${count} questions` : 'Coming soon'}
+                          </span>
+                        </div>
                       </div>
 
                       <p className="assessment-card__coverage">{assessment.coverageNote}</p>
 
                       <div className="assessment-card__footer">
                         <span className="assessment-card__cta">
-                          {isAvailable ? 'Start Practice' : 'Not yet available'}
+                          {isCompleted ? (
+                            <>
+                              <RotateCcw size={13} aria-hidden="true" />
+                              <span>Retake Assessment</span>
+                            </>
+                          ) : isAvailable ? (
+                            <span>Start Practice</span>
+                          ) : (
+                            <span>Not yet available</span>
+                          )}
                         </span>
                         {isAvailable && <ArrowRight size={15} className="assessment-card__arrow" />}
                       </div>

@@ -210,135 +210,139 @@ export default function App() {
   }
 
   return (
-    <div className="app">
+    <div className="app-shell">
       {/* Global Top Navbar */}
-      <header className="app__header">
-        <div className="app__header-left">
-          <button
-            type="button"
-            className="app__home-btn"
-            onClick={() => setView('home')}
-            aria-label="Return to Homepage"
-            title="Return to Homepage"
-          >
-            <BookOpenCheck aria-hidden="true" size={20} strokeWidth={2.5} />
-            <span className="app__logo-text">Study</span>
-          </button>
+      <header className="app-header">
+        <div className="app-header__container">
+          <div className="app-header__left">
+            <button
+              type="button"
+              className="app-header__home-btn"
+              onClick={() => setView('home')}
+              aria-label="Return to Homepage"
+              title="Return to Homepage"
+            >
+              <div className="app-header__logo-wrapper">
+                <BookOpenCheck aria-hidden="true" size={18} strokeWidth={2.5} />
+              </div>
+              <span className="app-header__logo-text">Study</span>
+            </button>
 
-          {/* Dynamic Breadcrumbs */}
-          <nav className="app__breadcrumbs" aria-label="Breadcrumb navigation">
-            <span className="app__crumb-sep" aria-hidden="true">/</span>
-            {college ? (
-              <button
-                type="button"
-                className="app__crumb app__crumb--btn"
-                onClick={() => {
-                  if (enrolledCourseIds.length > 0) setView('dashboard')
-                  else setView('schedule-builder')
-                }}
-              >
-                {college.name}
-              </button>
-            ) : (
-              <span className="app__crumb">Choose University</span>
-            )}
-
-            {view === 'schedule-builder' && (
-              <>
-                <span className="app__crumb-sep" aria-hidden="true">/</span>
-                <span className="app__crumb app__crumb--active">Course Selection</span>
-              </>
-            )}
-
-            {view === 'dashboard' && (
-              <>
-                <span className="app__crumb-sep" aria-hidden="true">/</span>
-                <span className="app__crumb app__crumb--active">Semester Dashboard</span>
-              </>
-            )}
-
-            {view === 'mixed-quiz' && (
-              <>
-                <span className="app__crumb-sep" aria-hidden="true">/</span>
-                <span className="app__crumb app__crumb--active">Combined Semester Exam</span>
-              </>
-            )}
-
-            {(view === 'course-study' || view === 'quiz') && activeCourse && (
-              <>
-                <span className="app__crumb-sep" aria-hidden="true">/</span>
+            {/* Dynamic Breadcrumbs */}
+            <nav className="app-header__breadcrumbs" aria-label="Breadcrumb navigation">
+              <span className="app-header__crumb-sep" aria-hidden="true">/</span>
+              {college ? (
                 <button
                   type="button"
-                  className="app__crumb app__crumb--btn app__crumb--highlight"
-                  onClick={() => openCourseStudy(activeCourse.id)}
+                  className="app-header__crumb app-header__crumb--btn"
+                  onClick={() => {
+                    if (enrolledCourseIds.length > 0) setView('dashboard')
+                    else setView('schedule-builder')
+                  }}
                 >
-                  {activeCourse.code}
+                  {college.name}
+                </button>
+              ) : (
+                <span className="app-header__crumb">Choose University</span>
+              )}
+
+              {view === 'schedule-builder' && (
+                <>
+                  <span className="app-header__crumb-sep" aria-hidden="true">/</span>
+                  <span className="app-header__crumb app-header__crumb--active">Course Selection</span>
+                </>
+              )}
+
+              {view === 'dashboard' && (
+                <>
+                  <span className="app-header__crumb-sep" aria-hidden="true">/</span>
+                  <span className="app-header__crumb app-header__crumb--active">Semester Dashboard</span>
+                </>
+              )}
+
+              {view === 'mixed-quiz' && (
+                <>
+                  <span className="app-header__crumb-sep" aria-hidden="true">/</span>
+                  <span className="app-header__crumb app-header__crumb--active">Combined Semester Exam</span>
+                </>
+              )}
+
+              {(view === 'course-study' || view === 'quiz') && activeCourse && (
+                <>
+                  <span className="app-header__crumb-sep" aria-hidden="true">/</span>
+                  <button
+                    type="button"
+                    className="app-header__crumb app-header__crumb--btn app-header__crumb--highlight"
+                    onClick={() => openCourseStudy(activeCourse.id)}
+                  >
+                    {activeCourse.code}
+                  </button>
+                </>
+              )}
+
+              {view === 'quiz' && assessment && (
+                <>
+                  <span className="app-header__crumb-sep" aria-hidden="true">/</span>
+                  <span className="app-header__crumb app-header__crumb--active">{assessment.label}</span>
+                </>
+              )}
+            </nav>
+          </div>
+
+          {/* Header Right Actions & Counter */}
+          <div className="app-header__right">
+            {(view === 'quiz' || view === 'mixed-quiz') && !finished && total > 0 ? (
+              <>
+                <div className="app-header__progress-pill">
+                  <span className="app-header__progress-count">
+                    {index + 1} of {total}
+                  </span>
+                  <span className="app-header__progress-pct">
+                    {Math.round(((index + 1) / total) * 100)}%
+                  </span>
+                </div>
+                <button
+                  type="button"
+                  className="btn-secondary app-header__action-btn"
+                  onClick={() => {
+                    resetSession()
+                    if (view === 'quiz' && activeCourseId) setView('course-study')
+                    else setView('dashboard')
+                  }}
+                  title="Exit Assessment"
+                >
+                  <span>Exit Quiz</span>
                 </button>
               </>
-            )}
-
-            {view === 'quiz' && assessment && (
-              <>
-                <span className="app__crumb-sep" aria-hidden="true">/</span>
-                <span className="app__crumb app__crumb--active">{assessment.label}</span>
-              </>
-            )}
-          </nav>
-        </div>
-
-        {/* Header Right Actions & Counter */}
-        <div className="app__header-right">
-          {(view === 'quiz' || view === 'mixed-quiz') && !finished && total > 0 ? (
-            <>
-              <div className="app__progress-pill">
-                <span className="app__progress-count">
-                  {index + 1} of {total}
-                </span>
-                <span className="app__progress-pct">
-                  {Math.round(((index + 1) / total) * 100)}%
-                </span>
-              </div>
+            ) : view === 'course-study' ? (
               <button
                 type="button"
-                className="btn-secondary app__header-action-btn"
-                onClick={() => {
-                  resetSession()
-                  if (view === 'quiz' && activeCourseId) setView('course-study')
-                  else setView('dashboard')
-                }}
-                title="Exit Assessment"
+                className="btn-secondary app-header__action-btn"
+                onClick={() => setView('dashboard')}
               >
-                <span>Exit Quiz</span>
+                <Layers size={14} aria-hidden="true" />
+                <span>My Semester Courses</span>
               </button>
-            </>
-          ) : view === 'course-study' ? (
-            <button
-              type="button"
-              className="btn-secondary app__header-action-btn"
-              onClick={() => setView('dashboard')}
-            >
-              <Layers size={14} aria-hidden="true" />
-              <span>My Semester Courses</span>
-            </button>
-          ) : view === 'dashboard' ? (
-            <button
-              type="button"
-              className="btn-secondary app__header-action-btn"
-              onClick={() => setView('schedule-builder')}
-            >
-              <Plus size={14} aria-hidden="true" />
-              <span>Edit Schedule</span>
-            </button>
-          ) : collegeId ? (
-            <button
-              type="button"
-              className="btn-secondary app__header-action-btn"
-              onClick={() => setView('home')}
-            >
-              <GraduationCap size={14} aria-hidden="true" />
-              <span>Change University</span>
-            </button>
-          ) : null}
+            ) : view === 'dashboard' ? (
+              <button
+                type="button"
+                className="btn-secondary app-header__action-btn"
+                onClick={() => setView('schedule-builder')}
+              >
+                <Plus size={14} aria-hidden="true" />
+                <span>Edit Schedule</span>
+              </button>
+            ) : collegeId ? (
+              <button
+                type="button"
+                className="btn-secondary app-header__action-btn"
+                onClick={() => setView('home')}
+              >
+                <GraduationCap size={14} aria-hidden="true" />
+                <span>Change University</span>
+              </button>
+            ) : null}
+          </div>
         </div>
       </header>
 
@@ -359,179 +363,182 @@ export default function App() {
         </div>
       )}
 
-      {/* Main Content Router */}
-      <main className="app__main">
-        {/* VIEW: Course Schedule Builder */}
-        {view === 'schedule-builder' && (
-          <CourseScheduleBuilder
-            collegeName={college?.name ?? 'University'}
-            courses={allCollegeCourses}
-            selectedCourseIds={enrolledCourseIds}
-            onToggleCourse={toggleEnrollCourse}
-            onOpenDashboard={() => setView('dashboard')}
-            onCancel={enrolledCourseIds.length > 0 ? () => setView('dashboard') : undefined}
-          />
-        )}
-
-        {/* VIEW: Semester Dashboard ("My Courses") */}
-        {view === 'dashboard' && (
-          <SemesterDashboard
-            collegeName={college?.name ?? 'University'}
-            enrolledCourses={enrolledCourses}
-            onSelectCourse={openCourseStudy}
-            onStartMixedExam={startMixedExam}
-            onAddMoreCourses={() => setView('schedule-builder')}
-            onRemoveCourse={toggleEnrollCourse}
-            history={history}
-            getCourseAssessments={(cId) => assessmentsForCourse(cId)}
-          />
-        )}
-
-        {/* VIEW: Single Course Study Hub (AssessmentChooser) */}
-        {view === 'course-study' && activeCourse && (
-          <div className="course-study-view">
-            <div className="course-study-view__header">
-              <button
-                type="button"
-                className="btn-secondary course-study-view__back-btn"
-                onClick={() => setView('dashboard')}
-              >
-                <ArrowLeft size={16} aria-hidden="true" />
-                <span>Back to Semester Dashboard</span>
-              </button>
-
-              <div className="course-study-view__title-box">
-                <span className="course-study-view__code-badge">{activeCourse.code}</span>
-                <h1 className="course-study-view__title">{activeCourse.title}</h1>
-              </div>
-            </div>
-
-            {/* Syllabus Section Selector if multiple offerings exist */}
-            {courseSyllabi.length > 1 && (
-              <section className="selectors" aria-label="Course section selection">
-                <SelectField
-                  label="Class Section Offering"
-                  value={syllabusId ?? ''}
-                  onValueChange={chooseSyllabus}
-                  options={courseSyllabi.map((item) => ({
-                    value: item.id,
-                    label: `${item.term} · Section ${item.section}`,
-                    hint: item.instructor,
-                  }))}
-                />
-              </section>
-            )}
-
-            <AssessmentChooser
-              syllabus={syllabus}
-              assessments={courseAssessments}
-              questionCount={(id) => questionsForAssessment(id).length}
-              onSelect={startAssessment}
+      {/* Main Content Router Container */}
+      <div className={`app-container ${view === 'quiz' || view === 'mixed-quiz' ? 'app-container--quiz' : ''}`}>
+        <main className="app__main">
+          {/* VIEW: Course Schedule Builder */}
+          {view === 'schedule-builder' && (
+            <CourseScheduleBuilder
+              collegeName={college?.name ?? 'University'}
+              courses={allCollegeCourses}
+              selectedCourseIds={enrolledCourseIds}
+              onToggleCourse={toggleEnrollCourse}
+              onOpenDashboard={() => setView('dashboard')}
+              onCancel={enrolledCourseIds.length > 0 ? () => setView('dashboard') : undefined}
             />
-          </div>
-        )}
+          )}
 
-        {/* VIEW: Quiz / Mixed Exam Session */}
-        {(view === 'quiz' || view === 'mixed-quiz') && (
-          finished ? (
-            <section className="summary" aria-labelledby="summary-title">
-              <div className="summary__card">
-                <div
-                  className={`summary__trophy-wrapper ${
-                    percentage >= 80
-                      ? 'summary__trophy-wrapper--high'
-                      : percentage >= 60
-                      ? 'summary__trophy-wrapper--mid'
-                      : 'summary__trophy-wrapper--low'
-                  }`}
+          {/* VIEW: Semester Dashboard ("My Courses") */}
+          {view === 'dashboard' && (
+            <SemesterDashboard
+              collegeName={college?.name ?? 'University'}
+              enrolledCourses={enrolledCourses}
+              onSelectCourse={openCourseStudy}
+              onStartMixedExam={startMixedExam}
+              onAddMoreCourses={() => setView('schedule-builder')}
+              onRemoveCourse={toggleEnrollCourse}
+              history={history}
+              getCourseAssessments={(cId) => assessmentsForCourse(cId)}
+            />
+          )}
+
+          {/* VIEW: Single Course Study Hub (AssessmentChooser) */}
+          {view === 'course-study' && activeCourse && (
+            <div className="course-study-view">
+              <div className="course-study-view__header">
+                <button
+                  type="button"
+                  className="btn-secondary course-study-view__back-btn"
+                  onClick={() => setView('dashboard')}
                 >
-                  {percentage >= 80 ? (
-                    <Trophy size={40} />
-                  ) : percentage >= 60 ? (
-                    <Award size={40} />
-                  ) : (
-                    <GraduationCap size={40} />
-                  )}
+                  <ArrowLeft size={16} aria-hidden="true" />
+                  <span>Back to Semester Dashboard</span>
+                </button>
+
+                <div className="course-study-view__title-box">
+                  <span className="course-study-view__code-badge">{activeCourse.code}</span>
+                  <h1 className="course-study-view__title">{activeCourse.title}</h1>
                 </div>
+              </div>
 
-                <h2 id="summary-title" className="summary__title">
-                  {percentage === 100
-                    ? 'Perfect Score!'
-                    : percentage >= 80
-                    ? 'Great Job!'
-                    : percentage >= 60
-                    ? 'Good Practice Session!'
-                    : 'Keep Practicing!'}
-                </h2>
+              {/* Syllabus Section Selector if multiple offerings exist */}
+              {courseSyllabi.length > 1 && (
+                <section className="selectors" aria-label="Course section selection">
+                  <SelectField
+                    label="Class Section Offering"
+                    value={syllabusId ?? ''}
+                    onValueChange={chooseSyllabus}
+                    options={courseSyllabi.map((item) => ({
+                      value: item.id,
+                      label: `${item.term} · Section ${item.section}`,
+                      hint: item.instructor,
+                    }))}
+                  />
+                </section>
+              )}
 
-                <div className="summary__subtitle">
-                  {view === 'mixed-quiz' ? (
-                    <p>You've completed the <strong>Combined Semester Exam</strong> across all your active courses.</p>
-                  ) : (
-                    <p>You've completed <strong>{assessment?.label}</strong> for <strong>{activeCourse?.code}</strong>.</p>
-                  )}
-                </div>
+              <AssessmentChooser
+                syllabus={syllabus}
+                assessments={courseAssessments}
+                questionCount={(id) => questionsForAssessment(id).length}
+                onSelect={startAssessment}
+                history={history}
+              />
+            </div>
+          )}
 
-                <div className="summary__stats-grid">
-                  <div className="summary__stat-box">
-                    <span className="summary__stat-number">{correctCount} / {total}</span>
-                    <span className="summary__stat-label">Correct Answers</span>
+          {/* VIEW: Quiz / Mixed Exam Session */}
+          {(view === 'quiz' || view === 'mixed-quiz') && (
+            finished ? (
+              <section className="summary" aria-labelledby="summary-title">
+                <div className="summary__card">
+                  <div
+                    className={`summary__trophy-wrapper ${
+                      percentage >= 80
+                        ? 'summary__trophy-wrapper--high'
+                        : percentage >= 60
+                        ? 'summary__trophy-wrapper--mid'
+                        : 'summary__trophy-wrapper--low'
+                    }`}
+                  >
+                    {percentage >= 80 ? (
+                      <Trophy size={40} />
+                    ) : percentage >= 60 ? (
+                      <Award size={40} />
+                    ) : (
+                      <GraduationCap size={40} />
+                    )}
                   </div>
-                  <div className="summary__stat-box">
-                    <span className="summary__stat-number">{percentage}%</span>
-                    <span className="summary__stat-label">Accuracy Rate</span>
+
+                  <h2 id="summary-title" className="summary__title">
+                    {percentage === 100
+                      ? 'Perfect Score!'
+                      : percentage >= 80
+                      ? 'Great Job!'
+                      : percentage >= 60
+                      ? 'Good Practice Session!'
+                      : 'Keep Practicing!'}
+                  </h2>
+
+                  <div className="summary__subtitle">
+                    {view === 'mixed-quiz' ? (
+                      <p>You've completed the <strong>Combined Semester Exam</strong> across all your active courses.</p>
+                    ) : (
+                      <p>You've completed <strong>{assessment?.label}</strong> for <strong>{activeCourse?.code}</strong>.</p>
+                    )}
                   </div>
-                </div>
 
-                <div className="summary__actions">
-                  <button type="button" className="btn-primary summary__btn" onClick={resetSession}>
-                    <RotateCcw size={18} aria-hidden="true" />
-                    <span>Practice Again</span>
-                  </button>
+                  <div className="summary__stats-grid">
+                    <div className="summary__stat-box">
+                      <span className="summary__stat-number">{correctCount} / {total}</span>
+                      <span className="summary__stat-label">Correct Answers</span>
+                    </div>
+                    <div className="summary__stat-box">
+                      <span className="summary__stat-number">{percentage}%</span>
+                      <span className="summary__stat-label">Accuracy Rate</span>
+                    </div>
+                  </div>
 
-                  {view === 'quiz' && activeCourse && (
+                  <div className="summary__actions">
+                    <button type="button" className="btn-primary summary__btn" onClick={resetSession}>
+                      <RotateCcw size={18} aria-hidden="true" />
+                      <span>Practice Again</span>
+                    </button>
+
+                    {view === 'quiz' && activeCourse && (
+                      <button
+                        type="button"
+                        className="btn-secondary summary__btn"
+                        onClick={() => setView('course-study')}
+                      >
+                        <ArrowLeft size={16} aria-hidden="true" />
+                        <span>Back to {activeCourse.code} Quizzes</span>
+                      </button>
+                    )}
+
                     <button
                       type="button"
                       className="btn-secondary summary__btn"
-                      onClick={() => setView('course-study')}
+                      onClick={() => setView('dashboard')}
                     >
-                      <ArrowLeft size={16} aria-hidden="true" />
-                      <span>Back to {activeCourse.code} Quizzes</span>
+                      <Layers size={16} aria-hidden="true" />
+                      <span>Return to Semester Dashboard</span>
                     </button>
-                  )}
-
-                  <button
-                    type="button"
-                    className="btn-secondary summary__btn"
-                    onClick={() => setView('dashboard')}
-                  >
-                    <Layers size={16} aria-hidden="true" />
-                    <span>Return to Semester Dashboard</span>
+                  </div>
+                </div>
+              </section>
+            ) : (
+              question ? (
+                <QuestionCard
+                  key={question.id}
+                  question={question}
+                  onAnswered={handleAnswered}
+                  onNext={handleNext}
+                  isLast={index + 1 === total}
+                />
+              ) : (
+                <div className="notice notice--error" role="alert">
+                  <strong>No questions available</strong>
+                  <p>No active questions found for this assessment.</p>
+                  <button type="button" className="btn-secondary" onClick={() => setView('dashboard')}>
+                    Return to Dashboard
                   </button>
                 </div>
-              </div>
-            </section>
-          ) : (
-            question ? (
-              <QuestionCard
-                key={question.id}
-                question={question}
-                onAnswered={handleAnswered}
-                onNext={handleNext}
-                isLast={index + 1 === total}
-              />
-            ) : (
-              <div className="notice notice--error" role="alert">
-                <strong>No questions available</strong>
-                <p>No active questions found for this assessment.</p>
-                <button type="button" className="btn-secondary" onClick={() => setView('dashboard')}>
-                  Return to Dashboard
-                </button>
-              </div>
+              )
             )
-          )
-        )}
-      </main>
+          )}
+        </main>
+      </div>
     </div>
   )
 }
