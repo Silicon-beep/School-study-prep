@@ -167,6 +167,31 @@
   max-width: 540px;
 }
 
+.home-hero__trust-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 28px;
+}
+
+.home-hero__trust-list span {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 8px 12px;
+  color: var(--text-secondary);
+  background: color-mix(in srgb, var(--surface) 88%, transparent);
+  border: 1px solid var(--surface-border);
+  border-radius: var(--radius-full);
+  box-shadow: var(--shadow-xs);
+  font-size: 0.8125rem;
+  font-weight: 650;
+}
+
+.home-hero__trust-list svg {
+  color: var(--primary);
+}
+
 .home-hero__actions {
   display: flex;
   gap: 12px;
@@ -670,6 +695,113 @@
   margin: 0;
   font-size: 0.9375rem;
   color: var(--text-secondary);
+  max-width: 560px;
+  line-height: 1.55;
+}
+
+/* Featured University Shortcuts */
+.home-featured-colleges {
+  padding: 22px;
+  margin-bottom: 22px;
+  background:
+    radial-gradient(circle at top left, color-mix(in srgb, var(--primary-light) 80%, transparent), transparent 34%),
+    var(--surface);
+  border: 1px solid var(--surface-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+}
+
+.home-featured-colleges__header {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  align-items: flex-end;
+  margin-bottom: 16px;
+}
+
+.home-featured-colleges__header h3 {
+  margin: 0;
+  color: var(--text-primary);
+  font-size: 1.15rem;
+  letter-spacing: -0.015em;
+}
+
+.home-featured-colleges__header > span {
+  color: var(--text-tertiary);
+  font-size: 0.8125rem;
+  font-weight: 650;
+}
+
+.home-featured-colleges__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+}
+
+@media (min-width: 640px) {
+  .home-featured-colleges__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 960px) {
+  .home-featured-colleges__grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.featured-college-card {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  grid-template-areas:
+    "state name"
+    "state meta";
+  gap: 2px 12px;
+  align-items: center;
+  padding: 14px;
+  color: var(--text-primary);
+  background: color-mix(in srgb, var(--surface) 92%, white);
+  border: 1px solid var(--surface-border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-xs);
+  cursor: pointer;
+  text-align: left;
+  transition: var(--transition);
+}
+
+.featured-college-card:hover {
+  transform: translateY(-2px);
+  border-color: var(--primary-border);
+  box-shadow: var(--shadow-md);
+}
+
+.featured-college-card__state {
+  grid-area: state;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  color: var(--primary);
+  background: var(--primary-light);
+  border: 1px solid var(--primary-border);
+  border-radius: var(--radius-sm);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 800;
+}
+
+.featured-college-card strong {
+  grid-area: name;
+  font-size: 0.9125rem;
+  line-height: 1.25;
+}
+
+.featured-college-card span:last-child {
+  grid-area: meta;
+  color: var(--text-tertiary);
+  font-size: 0.75rem;
+  font-weight: 650;
 }
 
 /* Search Box and Category Pills */
@@ -779,6 +911,9 @@
 }
 
 .home-colleges__results-info {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   margin-bottom: 16px;
   font-size: 0.875rem;
   color: var(--text-secondary);
@@ -807,7 +942,7 @@
   display: flex;
   align-items: center;
   gap: 14px;
-  padding: 16px 18px;
+  padding: 18px;
   background: var(--surface);
   border: 1px solid var(--surface-border);
   border-radius: var(--radius-md);
@@ -980,4 +1115,3 @@
   font-size: 0.8125rem;
   color: var(--text-tertiary);
 }
-

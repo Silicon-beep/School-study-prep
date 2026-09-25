@@ -18,6 +18,7 @@ import {
   Search,
   ShieldCheck,
   Sparkles,
+  Target,
   Zap,
   X,
 } from 'lucide-react'
@@ -51,6 +52,8 @@ const POPULAR_COLLEGE_IDS = [
   { id: 'unc', name: 'UNC Chapel Hill', badge: '10k+ Courses' },
   { id: 'uiuc', name: 'UIUC', badge: '9.4k+ Courses' },
 ]
+
+const FEATURED_COLLEGE_IDS = ['unt', 'ut-austin', 'tamu', 'harvard', 'uc-berkeley', 'penn']
 
 const SUBJECTS = [
   {
@@ -154,6 +157,12 @@ export function HomePage({ stateGroups, onSelectCollege }: HomePageProps) {
     })
   }, [allColleges, selectedCategory, searchQuery, stateGroups])
 
+  const featuredColleges = useMemo(() => {
+    return FEATURED_COLLEGE_IDS.map((collegeId) => allColleges.find((college) => college.id === collegeId)).filter(
+      Boolean,
+    ) as typeof allColleges
+  }, [allColleges])
+
   function showColleges() {
     collegeHeadingRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' })
     setTimeout(() => searchInputRef.current?.focus(), 400)
@@ -208,21 +217,36 @@ export function HomePage({ stateGroups, onSelectCollege }: HomePageProps) {
               </div>
 
               <h1 id="home-title" className="home-hero__title">
-                Ace your college exams with <span className="home-hero__gradient">syllabus-driven</span> practice.
+                Find your course. Practice what is actually on the exam.
               </h1>
 
               <p className="home-hero__copy">
-                Structured quizzes, midterm preparation, and cumulative final reviews aligned directly with your university courses and instructor syllabi.
+                Pick your university, match your course code, then study with syllabus-aligned quizzes, midterm prep, and final review.
               </p>
 
               <div className="home-hero__actions">
                 <button type="button" className="btn-primary home-hero__primary-btn" onClick={showColleges}>
-                  <span>Find Your College</span>
+                  <span>Start Studying by University</span>
                   <ArrowRight aria-hidden="true" size={18} />
                 </button>
                 <a href="#subjects" className="btn-secondary home-hero__secondary-btn">
                   <span>Explore Subjects</span>
                 </a>
+              </div>
+
+              <div className="home-hero__trust-list" aria-label="What Study includes">
+                <span>
+                  <ShieldCheck size={15} aria-hidden="true" />
+                  Syllabus-aligned
+                </span>
+                <span>
+                  <Target size={15} aria-hidden="true" />
+                  Course-code matching
+                </span>
+                <span>
+                  <BookOpen size={15} aria-hidden="true" />
+                  Quiz, midterm, and final prep
+                </span>
               </div>
 
               {/* Quick Jump Bar */}
@@ -383,8 +407,11 @@ export function HomePage({ stateGroups, onSelectCollege }: HomePageProps) {
           <div className="section-header">
             <span className="section-eyebrow">Simple &amp; Focused</span>
             <h2 id="how-title" className="section-title">
-              Built for how college students actually study
+              A guided path from school to study session
             </h2>
+            <p className="section-desc">
+              No giant content library to decode. Start with your campus, narrow to the exact course, then choose the prep mode that matches your next deadline.
+            </p>
           </div>
 
           <div className="home-how-grid">
@@ -393,8 +420,8 @@ export function HomePage({ stateGroups, onSelectCollege }: HomePageProps) {
               <div className="how-step-card__icon-wrap">
                 <MapPin size={22} />
               </div>
-              <h3>Pick Your University &amp; Course</h3>
-              <p>Choose from 38 major institutions or browse through 110,000+ course catalog listings.</p>
+              <h3>Pick Your University</h3>
+              <p>Choose from 38 major institutions and search by school, state, abbreviation, or campus nickname.</p>
             </div>
 
             <div className="how-step-card">
@@ -402,8 +429,8 @@ export function HomePage({ stateGroups, onSelectCollege }: HomePageProps) {
               <div className="how-step-card__icon-wrap">
                 <Layers size={22} />
               </div>
-              <h3>Choose Quizzes or Midterms</h3>
-              <p>Practice weekly chapter milestones, lecture review blocks, or full comprehensive finals.</p>
+              <h3>Match Your Course</h3>
+              <p>Use catalog course codes and syllabus signals to get practice that fits the class you are taking.</p>
             </div>
 
             <div className="how-step-card">
@@ -411,8 +438,8 @@ export function HomePage({ stateGroups, onSelectCollege }: HomePageProps) {
               <div className="how-step-card__icon-wrap">
                 <Zap size={22} />
               </div>
-              <h3>Instant Explanations &amp; Feedback</h3>
-              <p>Every problem includes thorough rationales so you learn the underlying reasoning immediately.</p>
+              <h3>Start the Right Prep Mode</h3>
+              <p>Jump into quick quizzes, midterm blocks, or cumulative finals with explanations after each answer.</p>
             </div>
           </div>
         </section>
@@ -421,12 +448,12 @@ export function HomePage({ stateGroups, onSelectCollege }: HomePageProps) {
         <section id="colleges" className="home-colleges" aria-labelledby="college-heading">
           <div className="home-colleges__header">
             <div className="home-colleges__heading-text">
-              <span className="section-eyebrow">University Directory</span>
+              <span className="section-eyebrow">Start Here</span>
               <h2 id="college-heading" ref={collegeHeadingRef} tabIndex={-1}>
-                Choose your university to start
+                Choose your university to unlock courses
               </h2>
               <p className="home-colleges__subhead">
-                Select your school to load its course directory, syllabus-aligned quizzes, and exams.
+                Select a school to load its course directory, supported subjects, syllabus-aligned quizzes, and exam prep.
               </p>
             </div>
             <div className="home-colleges__stats">
@@ -436,6 +463,37 @@ export function HomePage({ stateGroups, onSelectCollege }: HomePageProps) {
               </span>
             </div>
           </div>
+
+          {!searchQuery && selectedCategory === 'all' && featuredColleges.length > 0 && (
+            <div className="home-featured-colleges" aria-labelledby="featured-colleges-title">
+              <div className="home-featured-colleges__header">
+                <div>
+                  <span className="section-eyebrow">Popular starting points</span>
+                  <h3 id="featured-colleges-title">Jump into a commonly searched school</h3>
+                </div>
+                <span>Pick one, then choose your course.</span>
+              </div>
+
+              <div className="home-featured-colleges__grid">
+                {featuredColleges.map((college) => {
+                  const isIvy = IVY_LEAGUE_IDS.has(college.id)
+                  const popularMeta = POPULAR_COLLEGE_IDS.find((item) => item.id === college.id)
+                  return (
+                    <button
+                      key={college.id}
+                      type="button"
+                      className="featured-college-card"
+                      onClick={() => onSelectCollege(college.id)}
+                    >
+                      <span className="featured-college-card__state">{college.state}</span>
+                      <strong>{college.name}</strong>
+                      <span>{isIvy ? 'Ivy League' : popularMeta?.badge ?? 'Course catalog ready'}</span>
+                    </button>
+                  )
+                })}
+              </div>
+            </div>
+          )}
 
           {/* Live Search and Filter Bar */}
           <div className="home-search-container">
